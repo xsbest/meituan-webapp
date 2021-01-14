@@ -2,8 +2,6 @@ import tabReducer from './tabReducer';
 
 import {combineReducers} from 'redux';
 
-const reducers = combineReducers({
+const reducers = combinReducers({
   tabReducer
 });
-
-export default reducers   
