@@ -1,13 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import BottomBar from '../BottomBar/BottomBar.jsx'
-
-class Main extends React.Component{
-  constructor(props){
+class Main extends React.Component {
+  constructor(props) {
     super(props)
   }
 
-  render(){
+  render () {
     return (
       <div>
         <BottomBar></BottomBar>
@@ -17,6 +16,6 @@ class Main extends React.Component{
 }
 
 export default connect(
-  state =>({
+  state => ({
   })
 )(Main);
