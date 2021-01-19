@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import {Provider} from 'react-redux'
-import Main from './Main/Main.jsx'
+import Container from '../index/Main/Container'
 import store from './store'
 ReactDom.render(
   <Provider store={store}>
-    <Main></Main>
+    <Container/>
   </Provider>,
   document.getElementById('root')
 )

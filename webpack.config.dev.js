@@ -4,7 +4,7 @@ const scrRoot = path.resolve('./src')
 const devPath = path.resolve(__dirname, 'dev');
 const pageDir = path.resolve(scrRoot, 'page');
 const fs = require('fs');
-
+const webpack = require('webpack');
 //html模板
 
 function getHtmlArray(entryMap) {
@@ -46,16 +46,20 @@ const htmlArray = getHtmlArray(entryMap);
 module.exports = {
   mode: "development",
   devServer: {
-    contentBase: devPath
+    contentBase: devPath,
+    hot:true
   },
   entry: entryMap,
+  resolve:{
+    extensions:['.js','.jsx']
+  },
   output: {
     path: devPath,
     filename: '[name].min.js'
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: ['babel-loader'], include: scrRoot },
+      { test: /\.(js|jsx)$/, use: ['babel-loader',{loader:'eslint-loader'}],include: scrRoot },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
@@ -67,6 +71,12 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
+          {
+            loader:'sass-resources-loader',
+            options:{
+              resources: scrRoot + '/components/common.scss'
+            }
+          }
         ],
         include: scrRoot
       },
@@ -77,6 +87,10 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    namedModules: true
+  },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
   ].concat(htmlArray)
 }
